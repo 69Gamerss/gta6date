@@ -326,40 +326,45 @@ body {
     overflow-y: auto;
     height: auto;
   }
+  
   .time-value {
-    font-size: 2rem;
+    font-size: 2.5rem;
     line-height: 1;
   }
   
   .separator {
-    font-size: 2rem;
-    margin: 0 0.1rem;
+    font-size: 2.5rem;
+    margin: 0 0.2rem;
     padding-top: 0;
   }
   
   .time-label {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     margin-top: 0.2rem;
+    font-weight: 600;
   }
   
   .release-date {
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
+    font-size: 1rem;
+    margin-top: 0.8rem;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
   }
   
   .trailer-buttons {
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
     width: 100%;
-    max-width: 250px;
+    max-width: 280px;
     margin: 0 auto;
   }
   
   .trailer-button {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.8rem;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
     width: 100%;
     justify-content: center;
+    min-height: 50px;
   }
   
   /* Optimize background image for mobile */
@@ -370,80 +375,128 @@ body {
   }
   
   .main-content {
-    margin-top: 2vh;
-    padding-bottom: 1rem;
+    margin-top: 5vh;
+    padding-bottom: 1.5rem;
   }
   
   .countdown-display {
-    padding: 0.7rem 0.4rem;
+    padding: 1rem 0.5rem;
     width: 100%;
-    max-width: 300px;
+    max-width: 320px;
     margin: 0 auto;
+    border-radius: 15px;
   }
   
   .time-block {
-    margin: 0 0.15rem;
+    margin: 0 0.2rem;
   }
   
   .content {
-    padding: 1rem 0.75rem;
+    padding: 1.5rem 1rem;
     height: auto;
-    min-height: 100%;
+    min-height: 100vh;
+    justify-content: space-between;
   }
   
   .footer {
-    margin-top: 1rem;
-    padding-top: 0.5rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
     position: relative;
     bottom: 0;
-    padding-bottom: 1rem;
+    padding-bottom: 1.5rem;
   }
   
   .social-container {
-    gap: 1rem;
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
   }
   
   .social-button {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
   }
   
   .calendar-button {
-    padding: 0.6rem 1rem;
-    font-size: 0.8rem;
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+    min-height: 50px;
+  }
+  
+  /* Fix calendar dropdown position on mobile */
+  .calendar-dropdown {
+    bottom: 120px;
+    width: 80%;
+    max-width: 250px;
+  }
+  
+  /* Improve modal for mobile */
+  .modal-content {
+    width: 95%;
+    border-radius: 8px;
+  }
+  
+  .close-button {
+    top: 5px;
+    right: 5px;
   }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
   .time-value {
-    font-size: 3.5rem;
+    font-size: 3.8rem;
   }
   
   .separator {
-    font-size: 3.5rem;
+    font-size: 3.8rem;
   }
   
   .time-label {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 600;
   }
   
   .release-date {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
   }
   
   .main-content {
-    margin-top: 8vh;
+    margin-top: 10vh;
   }
   
   .countdown-display {
-    max-width: 450px;
+    max-width: 480px;
     margin: 0 auto;
+    padding: 1.2rem;
+    border-radius: 15px;
   }
   
   .trailer-buttons {
     flex-direction: row;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.2rem;
+    max-width: 500px;
+  }
+  
+  .trailer-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  /* Improve social buttons spacing */
+  .social-container {
+    gap: 1.2rem;
+  }
+  
+  .social-button {
+    width: 42px;
+    height: 42px;
+  }
+  
+  /* Fix calendar dropdown position */
+  .calendar-dropdown {
+    bottom: 100px;
   }
 }
 
@@ -490,5 +543,98 @@ body {
 
   .release-date {
     font-size: 1.6rem;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 360px) {
+  .time-value {
+    font-size: 2rem;
+  }
+  
+  .separator {
+    font-size: 2rem;
+  }
+  
+  .time-label {
+    font-size: 0.6rem;
+  }
+  
+  .countdown-display {
+    padding: 0.8rem 0.3rem;
+    max-width: 280px;
+  }
+  
+  .trailer-button {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .social-button {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .social-container {
+    gap: 0.8rem;
+  }
+  
+  .calendar-button {
+    padding: 0.7rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .main-content {
+    margin-top: 2vh;
+  }
+  
+  .release-date {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Fix for landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .main-content {
+    margin-top: 1vh;
+    padding-bottom: 0.5rem;
+  }
+  
+  .time-value {
+    font-size: 2.2rem;
+  }
+  
+  .separator {
+    font-size: 2.2rem;
+  }
+  
+  .time-label {
+    font-size: 0.6rem;
+  }
+  
+  .release-date {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .trailer-buttons {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  
+  .trailer-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .footer {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  
+  .social-container {
+    margin-bottom: 0;
   }
 }

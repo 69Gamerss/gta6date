@@ -1,5 +1,21 @@
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+  // Add passive event listeners for better mobile performance
+  const supportsPassive = false;
+  try {
+    const opts = Object.defineProperty({}, 'passive', {
+      get: function() {
+        supportsPassive = true;
+        return true;
+      }
+    });
+    window.addEventListener('testPassive', null, opts);
+    window.removeEventListener('testPassive', null, opts);
+  } catch (e) {}
+  
+  // Optimize for mobile devices
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
   // Countdown Timer
   function updateCountdown() {
     const releaseDate = new Date('May 26, 2026 00:00:00').getTime();
@@ -57,24 +73,43 @@ document.addEventListener('DOMContentLoaded', function() {
     modal.style.display = 'none';
   }
   
-  // Event listeners for trailer buttons
+  // Event listeners for trailer buttons with passive option for better mobile performance
+  const eventOptions = supportsPassive ? { passive: true } : false;
+  
   trailerButton1.addEventListener('click', function() {
     openTrailerModal(trailer1ID);
-  });
+  }, eventOptions);
   
   trailerButton2.addEventListener('click', function() {
     openTrailerModal(trailer2ID);
-  });
+  }, eventOptions);
   
   // Event listener for close button
-  closeModal.addEventListener('click', closeTrailerModal);
+  closeModal.addEventListener('click', closeTrailerModal, eventOptions);
   
   // Close modal when clicking outside content
   modal.addEventListener('click', function(e) {
     if (e.target === modal) {
       closeTrailerModal();
     }
-  });
+  }, eventOptions);
+  
+  // Add touch events for mobile
+  if (isMobile) {
+    // Improve touch target sizes for mobile
+    const touchTargets = document.querySelectorAll('.trailer-button, .social-button, .calendar-button, .close-button');
+    touchTargets.forEach(target => {
+      target.style.minHeight = '44px';
+      target.style.minWidth = '44px';
+    });
+    
+    // Add touch event for modal close
+    modal.addEventListener('touchend', function(e) {
+      if (e.target === modal) {
+        closeTrailerModal();
+      }
+    }, eventOptions);
+  }
   
   // Close modal when pressing ESC key
   document.addEventListener('keydown', function(e) {
@@ -87,8 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const calendarButton = document.getElementById('add-to-calendar-button');
   const calendarDropdown = document.getElementById('calendar-dropdown');
   
-  // Toggle calendar dropdown
-  calendarButton.addEventListener('click', function() {
+  // Toggle calendar dropdown with improved mobile handling
+  calendarButton.addEventListener('click', function(e) {
+    e.preventDefault();
     if (calendarDropdown.style.display === 'block') {
       calendarDropdown.style.display = 'none';
     } else {
@@ -96,16 +132,40 @@ document.addEventListener('DOMContentLoaded', function() {
       if (calendarDropdown.children.length === 0) {
         createCalendarLinks();
       }
+      
+      // Position the dropdown better on mobile
+      if (isMobile) {
+        const buttonRect = calendarButton.getBoundingClientRect();
+        const dropdownHeight = 220; // Approximate height
+        
+        // Check if there's enough space below the button
+        if (window.innerHeight - buttonRect.bottom < dropdownHeight) {
+          // Position above the button if not enough space below
+          calendarDropdown.style.bottom = (window.innerHeight - buttonRect.top + 10) + 'px';
+        } else {
+          // Default position below the button
+          calendarDropdown.style.bottom = '80px';
+        }
+      }
+      
       calendarDropdown.style.display = 'block';
     }
-  });
+  }, eventOptions);
   
-  // Close dropdown when clicking outside
+  // Close dropdown when clicking/touching outside
   document.addEventListener('click', function(e) {
     if (!calendarDropdown.contains(e.target) && e.target !== calendarButton) {
       calendarDropdown.style.display = 'none';
     }
-  });
+  }, eventOptions);
+  
+  if (isMobile) {
+    document.addEventListener('touchend', function(e) {
+      if (!calendarDropdown.contains(e.target) && e.target !== calendarButton) {
+        calendarDropdown.style.display = 'none';
+      }
+    }, eventOptions);
+  }
   
   // Create calendar links
   function createCalendarLinks() {
