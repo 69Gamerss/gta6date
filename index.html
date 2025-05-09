@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Countdown to GTA VI's official launch date with live updates, Rockstar news, trailer, and more.">
+  <meta property="og:title" content="GTA VI Countdown – Time Until Release">
+  <meta property="og:description" content="Countdown to GTA VI's official launch date with live updates, Rockstar news, trailer, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gta6.date">
+  <meta property="og:image" content="./assets/gta6-bg-8k.jpg">
+  <link rel="icon" href="./assets/gta6-bg-8k.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>GTA VI Countdown – Time Until Release</title>
+  <style>
+    :root {
+      --bg-primary: #000000;
+      --bg-secondary: #111111;
+      --text-primary: #ffffff;
+      --text-secondary: #cccccc;
+      --accent-yellow: #fcaf17;
+      --accent-yellow-dark: #e69500;
+      --accent-yellow-light: #ffc107;
+      --glow-color: rgba(252, 175, 23, 0.7);
+      --accent-pink: #ff00ff;
+      --accent-pink-glow: rgba(255, 0, 255, 0.3);
+      --accent-teal: #00ffcc;
+      --accent-teal-glow: rgba(0, 255, 204, 0.3);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      height: 100%;
+      font-size: 16px;
+    }
+
+    body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-primary);
+      line-height: 1.6;
+      background-color: #000000;
+      position: relative;
+      background-image: url('./assets/gta6-bg-8k.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%);
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
+      margin-top: 15vh;
+    }
+
+    .logo {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .gta-text {
+      font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+      font-size: 5rem;
+      color: var(--accent-yellow);
+      text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+      text-align: center;
+      letter-spacing: 2px;
+      margin: 0;
+      line-height: 1;
+    }
+
+    .grand-theft-auto-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-top: -0.5rem;
+    }
+
+    .countdown {
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    .countdown-display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 1rem 0;
+      padding: 1.5rem;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .time-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 0.5rem;
+    }
+
+    .time-value {
+      font-size: 4.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .time-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .separator {
+      font-size: 4.5rem;
+      font-weight: 700;
+      color: var(--accent-yellow);
+      margin: 0 0.25rem;
+      align-self: flex-start;
+      padding-top: 0.25rem;
+    }
+
+    .release-date {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .trailer-button {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: var(--text-primary);
+      border: 2px solid var(--accent-yellow);
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 0 10px var(--glow-color);
+      margin: 1rem 0;
+      cursor: pointer;
+    }
+
+    .trailer-button:hover {
+      background-color: var(--accent-yellow);
+      color: var(--bg-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px var(--glow-color);
+    }
+
+    .news-container {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      padding: 1.5rem;
+      width: 100%;
+      max-width: 800px;
+      margin: 1.5rem auto;
+      border: 2px solid var(--accent-yellow);
+      box-shadow: 0 0 30px rgba(252, 175, 23, 0.3);
+    }
+
+    .news-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      border-bottom: 2px solid var(--accent-yellow-dark);
+      padding-bottom: 0.75rem;
+    }
+
+    .news-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .news-item {
+      padding: 0.75rem;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+      margin-bottom: 0.75rem;
+      border-left: 4px solid var(--accent-yellow);
+    }
+
+    .news-item.gta6-related {
+      border-left: 4px solid var(--accent-pink);
+      box-shadow: 0 0 10px var(--accent-pink-glow);
+    }
+
+    .news-item-title {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .news-index {
+      color: var(--accent-yellow);
+      font-weight: bold;
+      font-size: 0.9rem;
+      min-width: 20px;
+    }
+
+    .news-link {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .news-link:hover {
+      color: var(--accent-yellow-light);
+    }
+
+    .gta6-badge {
+      background-color: var(--accent-pink);
+      color: #000000;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      white-space: nowrap;
+      margin-left: auto;
+    }
+
+    .news-date {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 0.2rem;
+      margin-left: 25px;
+    }
+
+    .footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    .social-container {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .social-button {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 1.1rem;
+    }
+
+    .social-button:hover {
+      transform: translateY(-3px);
+      background-color: var(--accent-yellow);
+      color: var(--bg-primary);
+      box-shadow: 0 0 10px var(--glow-color);
+    }
+
+    .calendar-button {
+      background-color: rgba(30, 30, 30, 0.7);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .calendar-button:hover {
+      background-color: var(--accent-yellow);
+      color: var(--bg-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 0 10px var(--glow-color);
+    }
+    
+    /* Custom Calendar Button Styling */
+    .calendar-button {
+      background-color: rgba(30, 30, 30, 0.7);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    .calendar-button:hover {
+      background-color: var(--accent-yellow);
+      color: var(--bg-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 0 10px var(--glow-color);
+    }
+    
+    /* Confetti animation styles */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: var(--accent-yellow);
+      border-radius: 50%;
+      animation: fall 6s linear forwards;
+      z-index: 1000;
+    }
+    
+    @keyframes fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .gta-text {
+        font-size: 6rem;
+      }
+
+      .grand-theft-auto-text {
+        font-size: 1.4rem;
+      }
+
+      .time-value {
+        font-size: 5rem;
+      }
+
+      .separator {
+        font-size: 5rem;
+      }
+
+      .time-label {
+        font-size: 0.9rem;
+      }
+
+      .release-date {
+        font-size: 1.4rem;
+      }
+
+      .footer {
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .social-container {
+        margin-bottom: 0;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .gta-text {
+        font-size: 7rem;
+      }
+
+      .time-value {
+        font-size: 6rem;
+      }
+
+      .separator {
+        font-size: 6rem;
+      }
+
+      .release-date {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  
+  <div class="content">
+    <div class="main-content">
+      <!-- Countdown section -->
+      <div class="countdown">
+        <div class="countdown-display">
+          <div class="time-block">
+            <span class="time-value" id="days">386</span>
+            <span class="time-label">DAYS</span>
+          </div>
+          
+          <span class="separator">:</span>
+          
+          <div class="time-block">
+            <span class="time-value" id="hours">22</span>
+            <span class="time-label">HOURS</span>
+          </div>
+          
+          <span class="separator">:</span>
+          
+          <div class="time-block">
+            <span class="time-value" id="minutes">51</span>
+            <span class="time-label">MINUTES</span>
+          </div>
+          
+          <span class="separator">:</span>
+          
+          <div class="time-block">
+            <span class="time-value" id="seconds">46</span>
+            <span class="time-label">SECONDS</span>
+          </div>
+        </div>
+        
+        <div class="release-date">GTA VI drops on May 26, 2026</div>
+      </div>
+      
+      <!-- Trailer buttons -->
+      <div style="display: flex; gap: 1rem; justify-content: center;">
+        <button class="trailer-button" id="trailer-button-1">▶ Watch Trailer 1</button>
+        <button class="trailer-button" id="trailer-button-2">▶ Watch Trailer 2</button>
+      </div>
+    </div>
+    
+    <!-- Footer with social links -->
+    <div class="footer">
+      <div class="social-container">
+        <a href="https://twitter.com/RockstarGames" class="social-button" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+          </svg>
+        </a>
+        
+        <a href="https://www.youtube.com/user/RockstarGames" class="social-button" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+          </svg>
+        </a>
+        
+        <a href="https://www.reddit.com/r/GTA6" class="social-button" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M6.167 8a.831.831 0 0 0-.83.83c0 .459.372.84.83.831a.831.831 0 0 0 0-1.661zm1.843 3.647c.315 0 1.403-.038 1.976-.611a.232.232 0 0 0 0-.306.213.213 0 0 0-.306 0c-.353.363-1.126.487-1.67.487-.545 0-1.308-.124-1.671-.487a.213.213 0 0 0-.306 0 .213.213 0 0 0 0 .306c.564.563 1.652.61 1.977.61zm.992-2.807c0 .458.373.83.831.83.458 0 .83-.381.83-.83a.831.831 0 0 0-1.66 0z"/>
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.828-1.165c-.315 0-.602.124-.812.325-.801-.573-1.9-.945-3.121-.993l.534-2.501 1.738.372a.83.83 0 1 0 .83-.869.83.83 0 0 0-.744.468l-1.938-.41a.203.203 0 0 0-.153.028.186.186 0 0 0-.086.134l-.592 2.788c-1.24.038-2.358.41-3.17.992-.21-.2-.496-.324-.81-.324a1.163 1.163 0 0 0-.478 2.224c-.02.115-.029.23-.029.353 0 1.795 2.091 3.256 4.669 3.256 2.577 0 4.668-1.451 4.668-3.256 0-.114-.01-.238-.029-.353.401-.181.688-.592.688-1.069 0-.65-.525-1.165-1.165-1.165z"/>
+          </svg>
+        </a>
+        
+        <a href="https://discord.gg/rockstargames" class="social-button" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
+          </svg>
+        </a>
+      </div>
+      
+      <button class="calendar-button" id="add-to-calendar-button">
+        📅 Add to Calendar
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Custom Calendar Dropdown
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add CSS for the dropdown
+      const style = document.createElement('style');
+      style.textContent = `
+        .calendar-dropdown {
+          position: fixed;
+          bottom: 80px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: rgba(0, 0, 0, 0.95);
+          border: 2px solid #fcaf17;
+          border-radius: 10px;
+          padding: 10px;
+          box-shadow: 0 0 15px rgba(252, 175, 23, 0.7);
+          z-index: 9999;
+          display: none;
+          width: 200px;
+        }
+        
+        .calendar-link {
+          display: flex;
+          align-items: center;
+          color: #ffffff;
+          padding: 8px 10px;
+          text-decoration: none;
+          border-radius: 5px;
+          margin: 5px 0;
+          font-size: 0.9rem;
+          font-family: 'Montserrat', sans-serif;
+          transition: all 0.2s ease;
+        }
+        
+        .calendar-link:hover {
+          background-color: #fcaf17;
+          color: #000000;
+          transform: translateY(-1px);
+        }
+        
+        .calendar-icon {
+          width: 16px;
+          height: 16px;
+          margin-right: 8px;
+          fill: currentColor;
+        }
+      `;
+      document.head.appendChild(style);
+      
+      const calendarButton = document.getElementById('add-to-calendar-button');
+      
+      // Create calendar dropdown
+      const dropdown = document.createElement('div');
+      dropdown.className = 'calendar-dropdown';
+      
+      // Event details
+      const eventTitle = "GTA VI Release";
+      const eventDescription = "Grand Theft Auto VI official release date";
+      const eventStartDate = "20260526T000000Z";
+      const eventEndDate = "20260526T235959Z";
+      const eventLocation = "Worldwide";
+      
+      // Calendar services
+      const calendarServices = [
+        {
+          name: "Google Calendar",
+          url: `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${eventStartDate}/${eventEndDate}&details=${encodeURIComponent(eventDescription)}&location=${encodeURIComponent(eventLocation)}`
+        },
+        {
+          name: "Apple Calendar",
+          url: `data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ADTSTART:${eventStartDate}%0ADTEND:${eventEndDate}%0ASUMMARY:${encodeURIComponent(eventTitle)}%0ADESCRIPTION:${encodeURIComponent(eventDescription)}%0ALOCATION:${encodeURIComponent(eventLocation)}%0AEND:VEVENT%0AEND:VCALENDAR`
+        },
+        {
+          name: "Outlook",
+          url: `https://outlook.office.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(eventTitle)}&body=${encodeURIComponent(eventDescription)}&startdt=${eventStartDate}&enddt=${eventEndDate}&location=${encodeURIComponent(eventLocation)}`
+        },
+        {
+          name: "Yahoo Calendar",
+          url: `https://calendar.yahoo.com/?v=60&title=${encodeURIComponent(eventTitle)}&desc=${encodeURIComponent(eventDescription)}&st=${eventStartDate}&et=${eventEndDate}&in_loc=${encodeURIComponent(eventLocation)}`
+        },
+        {
+          name: "Download .ics File",
+          url: `data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ADTSTART:${eventStartDate}%0ADTEND:${eventEndDate}%0ASUMMARY:${encodeURIComponent(eventTitle)}%0ADESCRIPTION:${encodeURIComponent(eventDescription)}%0ALOCATION:${encodeURIComponent(eventLocation)}%0AEND:VEVENT%0AEND:VCALENDAR`,
+          download: "gta-vi-release.ics"
+        }
+      ];
+      
+      // Simple, clean calendar service icons
+      const calendarIcons = {
+        "Google Calendar": `<svg class="calendar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+          <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
+          <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="15" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+          <line x1="12" y1="13" x2="12" y2="15" stroke="currentColor" stroke-width="2"/>
+          <line x1="12" y1="15" x2="14" y2="15" stroke="currentColor" stroke-width="2"/>
+        </svg>`,
+        "Apple Calendar": `<svg class="calendar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+          <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
+          <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
+          <text x="7" y="19" font-family="sans-serif" font-size="10" font-weight="bold" fill="currentColor">31</text>
+        </svg>`,
+        "Outlook": `<svg class="calendar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+          <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
+          <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="16" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>`,
+        "Yahoo Calendar": `<svg class="calendar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+          <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
+          <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
+          <path d="M9,14l3,5l3-5" stroke="currentColor" stroke-width="2" fill="none"/>
+        </svg>`,
+        "Download .ics File": `<svg class="calendar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+          <line x1="12" y1="12" x2="12" y2="18" stroke="currentColor" stroke-width="2"/>
+          <path d="M8,15l4,3l4-3" stroke="currentColor" stroke-width="2" fill="none"/>
+        </svg>`
+      };
+      
+      // Create links for each calendar service
+      calendarServices.forEach(service => {
+        const link = document.createElement('a');
+        link.href = service.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.className = 'calendar-link';
+        
+        // Add icon
+        link.innerHTML = calendarIcons[service.name] + service.name;
+        
+        if (service.download) {
+          link.download = service.download;
+        }
+        
+        dropdown.appendChild(link);
+      });
+      
+      // Add dropdown to the document
+      document.body.appendChild(dropdown);
+      
+      // Toggle dropdown when calendar button is clicked
+      calendarButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Toggle dropdown visibility
+        if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+          dropdown.style.display = 'block';
+        } else {
+          dropdown.style.display = 'none';
+        }
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target) && e.target !== calendarButton) {
+          dropdown.style.display = 'none';
+        }
+      });
+    });
+    
+    // Countdown Timer
+    function updateCountdown() {
+      const releaseDate = new Date('May 26, 2026 00:00:00').getTime();
+      const now = new Date().getTime();
+      const difference = releaseDate - now;
+      
+      if (difference <= 0) {
+        // Game has been released
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        
+        // Create confetti effect
+        createConfetti();
+        
+        // Clear the interval
+        clearInterval(interval);
+        return;
+      }
+      
+      // Calculate time units
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      
+      // Update the countdown display
+      document.getElementById('days').textContent = days.toString().padStart(2, '0');
+      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+    
+    // Create confetti effect
+    function createConfetti() {
+      const confettiCount = 200;
+      const container = document.querySelector('body');
+      
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        
+        // Random position, size, and delay
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.width = Math.random() * 10 + 5 + 'px';
+        confetti.style.height = confetti.style.width;
+        confetti.style.animationDelay = Math.random() * 5 + 's';
+        
+        container.appendChild(confetti);
+        
+        // Remove confetti after animation
+        setTimeout(() => {
+          confetti.remove();
+        }, 6000);
+      }
+    }
+    
+    // Update the countdown every second
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+    
+    // Trailer Modal Functions
+    function openTrailerModal(videoId) {
+      const modal = document.createElement('div');
+      modal.style.position = 'fixed';
+      modal.style.top = '0';
+      modal.style.left = '0';
+      modal.style.width = '100%';
+      modal.style.height = '100%';
+      modal.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+      modal.style.zIndex = '1000';
+      modal.style.display = 'flex';
+      modal.style.justifyContent = 'center';
+      modal.style.alignItems = 'center';
+      modal.style.backdropFilter = 'blur(5px)';
+      
+      const modalContent = document.createElement('div');
+      modalContent.style.position = 'relative';
+      modalContent.style.width = '90%';
+      modalContent.style.maxWidth = '900px';
+      modalContent.style.backgroundColor = 'var(--bg-secondary)';
+      modalContent.style.borderRadius = '10px';
+      modalContent.style.overflow = 'hidden';
+      modalContent.style.boxShadow = '0 0 30px rgba(252, 175, 23, 0.3)';
+      modalContent.style.border = '2px solid var(--accent-yellow)';
+      
+      const closeButton = document.createElement('button');
+      closeButton.innerHTML = '&times;';
+      closeButton.style.position = 'absolute';
+      closeButton.style.top = '10px';
+      closeButton.style.right = '15px';
+      closeButton.style.color = 'var(--text-primary)';
+      closeButton.style.fontSize = '2rem';
+      closeButton.style.cursor = 'pointer';
+      closeButton.style.zIndex = '10';
+      closeButton.style.transition = 'all 0.3s ease';
+      closeButton.style.background = 'rgba(0, 0, 0, 0.5)';
+      closeButton.style.border = 'none';
+      closeButton.style.width = '40px';
+      closeButton.style.height = '40px';
+      closeButton.style.borderRadius = '50%';
+      closeButton.style.display = 'flex';
+      closeButton.style.justifyContent = 'center';
+      closeButton.style.alignItems = 'center';
+      
+      closeButton.addEventListener('mouseover', function() {
+        closeButton.style.color = 'var(--accent-yellow)';
+        closeButton.style.transform = 'scale(1.1)';
+        closeButton.style.background = 'rgba(0, 0, 0, 0.8)';
+      });
+      
+      closeButton.addEventListener('mouseout', function() {
+        closeButton.style.color = 'var(--text-primary)';
+        closeButton.style.transform = 'scale(1)';
+        closeButton.style.background = 'rgba(0, 0, 0, 0.5)';
+      });
+      
+      closeButton.addEventListener('click', function() {
+        document.body.removeChild(modal);
+      });
+      
+      const videoContainer = document.createElement('div');
+      videoContainer.style.position = 'relative';
+      videoContainer.style.paddingBottom = '56.25%'; // 16:9 Aspect Ratio
+      videoContainer.style.height = '0';
+      videoContainer.style.overflow = 'hidden';
+      
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+      iframe.title = 'GTA VI Trailer';
+      iframe.frameBorder = '0';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.style.position = 'absolute';
+      iframe.style.top = '0';
+      iframe.style.left = '0';
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = 'none';
+      
+      videoContainer.appendChild(iframe);
+      modalContent.appendChild(closeButton);
+      modalContent.appendChild(videoContainer);
+      modal.appendChild(modalContent);
+      document.body.appendChild(modal);
+      
+      // Close modal when clicking outside the content
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          document.body.removeChild(modal);
+        }
+      });
+      
+      // Close modal when pressing ESC key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          if (document.body.contains(modal)) {
+            document.body.removeChild(modal);
+          }
+        }
+      });
+    }
+    
+    // Trailer Button Event Listeners
+    document.getElementById('trailer-button-1').addEventListener('click', function() {
+      openTrailerModal('QdBZY2fkU-0'); // First trailer
+    });
+    
+    document.getElementById('trailer-button-2').addEventListener('click', function() {
+      openTrailerModal('VQRLujxTm3c'); // Second trailer
+    });
+  </script>
