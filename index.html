@@ -5,12 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#000000">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="description" content="Countdown to GTA VI's official launch date with live updates, Rockstar news, trailer, and more.">
-  <meta property="og:title" content="GTA VI Countdown – Time Until Release">
-  <meta property="og:description" content="Countdown to GTA VI's official launch date with live updates, Rockstar news, trailer, and more.">
+  <meta name="description" content="Countdown to GTA VI's official release on November 19, 2026. Watch trailers, add to calendar, and track how close we are.">
+  <meta property="og:title" content="GTA VI Countdown – November 19, 2026">
+  <meta property="og:description" content="Countdown to GTA VI's official release on November 19, 2026. Watch trailers, add to calendar, and track how close we are.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gta6.date">
   <meta property="og:image" content="./assets/gta6-bg-8k.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GTA VI Countdown – November 19, 2026">
+  <meta name="twitter:description" content="Track the official GTA VI release countdown. Launching November 19, 2026 on PS5 &amp; Xbox Series X|S.">
+  <meta name="twitter:image" content="./assets/gta6-bg-8k.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Grand Theft Auto VI",
+    "description": "Grand Theft Auto VI by Rockstar Games, releasing November 19, 2026 on PS5 and Xbox Series X/S.",
+    "datePublished": "2026-11-19",
+    "publisher": { "@type": "Organization", "name": "Rockstar Games" },
+    "gamePlatform": ["PlayStation 5", "Xbox Series X/S"]
+  }
+  </script>
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
@@ -21,13 +36,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <title>GTA VI Countdown – Time Until Release</title>
+  <title>GTA VI Countdown – November 19, 2026</title>
 </head>
 <body>
   <div class="overlay"></div>
+  <div class="scanlines" aria-hidden="true"></div>
   
   <div class="content">
     <div class="main-content">
+      <!-- Site title -->
+      <div class="site-title">
+        <span class="gta-label">GTA</span><span class="gta-number">VI</span>
+        <div class="site-subtitle">OFFICIAL COUNTDOWN</div>
+      </div>
+
       <!-- Countdown section -->
       <div class="countdown">
         <div class="countdown-display">
@@ -58,9 +80,28 @@
           </div>
         </div>
         
-        <div class="release-date">GTA VI drops on May 26, 2026</div>
+        <div class="release-date" id="release-date-text">GTA VI drops on November 19, 2026</div>
+        <div class="release-tz" id="release-tz"></div>
+
+        <!-- Progress bar -->
+        <div class="progress-section">
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progress-bar"></div>
+          </div>
+          <div class="progress-labels">
+            <span>Trailer 1 (Dec 2023)</span>
+            <span id="progress-percent">0%</span>
+            <span>Release</span>
+          </div>
+        </div>
+
+        <!-- Platform badges -->
+        <div class="platform-badges">
+          <span class="platform-badge">PS5</span>
+          <span class="platform-badge">Xbox Series X|S</span>
+        </div>
       </div>
-      
+
       <!-- Trailer buttons -->
       <div class="trailer-buttons">
         <button class="trailer-button" id="trailer-button-1">▶ Watch Trailer 1</button>
@@ -100,6 +141,13 @@
       <button class="calendar-button" id="add-to-calendar-button">
         📅 Add to Calendar
       </button>
+
+      <button class="share-button" id="share-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+        </svg>
+        Share
+      </button>
     </div>
   </div>
   
@@ -115,6 +163,9 @@
   
   <!-- Calendar dropdown -->
   <div class="calendar-dropdown" id="calendar-dropdown"></div>
+
+  <!-- Milestone banner -->
+  <div class="milestone-banner" id="milestone-banner" hidden aria-live="assertive"></div>
 
   <!-- External JavaScript -->
   <script src="script.js"></script>
