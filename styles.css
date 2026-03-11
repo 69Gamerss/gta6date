@@ -38,17 +38,19 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   background-color: #000000;
-  position: relative;
   background-image: url('./assets/gta6-bg-8k.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  /* fixed attachment is broken on iOS Safari — use scroll everywhere,
+     the fixed overlay div handles the visual effect */
+  background-attachment: scroll;
   overflow-x: hidden;
 }
 
 .overlay {
-  position: absolute;
+  /* fixed so it always covers the viewport, even when the page scrolls on mobile */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -377,15 +379,18 @@ body {
   color: #000000;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   letter-spacing: 0.06em;
-  padding: 0.65rem 1.6rem;
+  padding: 0.65rem 1.4rem;
   border-radius: 50px;
   box-shadow: 0 6px 24px rgba(252, 175, 23, 0.55);
   z-index: 600;
   opacity: 0;
   transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
-  white-space: nowrap;
+  /* allow wrapping on small screens instead of overflowing */
+  white-space: normal;
+  text-align: center;
+  max-width: calc(100vw - 2rem);
   pointer-events: none;
 }
 
@@ -592,20 +597,29 @@ body {
 .close-button {
   position: absolute;
   top: 10px;
-  right: 15px;
-  color: var(--text-primary);
-  font-size: 2rem;
+  right: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.4rem;
+  line-height: 1;
   cursor: pointer;
   z-index: 10;
-  transition: all 0.3s ease;
-  background: rgba(0, 0, 0, 0.5);
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  background: rgba(18, 18, 18, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  width: 38px;
+  height: 38px;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+.close-button:hover {
+  background: var(--accent-yellow);
+  color: #000;
+  border-color: var(--accent-yellow);
+  box-shadow: 0 6px 20px rgba(252, 175, 23, 0.38);
 }
 
 .video-container {
@@ -629,6 +643,8 @@ body {
   html, body {
     overflow-y: auto;
     height: auto;
+    /* smooth momentum scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
   }
 
   .flip-unit {
@@ -674,11 +690,9 @@ body {
     min-height: 48px;
   }
 
-  /* Optimize background image for mobile */
+  /* Shift background focus point on mobile */
   body {
     background-position: center 20%;
-    background-size: cover;
-    background-attachment: scroll;
   }
 
   .main-content {
