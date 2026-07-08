@@ -1,0 +1,13 @@
+{
+  "name": "gta6date",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Countdown to the GTA VI release — static site for gta6.date",
+  "scripts": {
+    "optimize": "node scripts/optimize-images.mjs"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "sharp": "^0.35.3"
+  }
+}

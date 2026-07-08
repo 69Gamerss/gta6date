@@ -1,99 +1,71 @@
-# GTA VI Release Countdown Website
+# GTA VI Release Countdown — [gta6.date](https://gta6.date/)
 
-A modern, responsive, dark-themed website that displays a live countdown timer to the official release of GTA VI, along with a trailer embed, social features, and more.
+A fast, responsive, dark-themed site with a live countdown to the official
+**Grand Theft Auto VI** release: **November 19, 2026** on PS5 & Xbox Series X|S.
 
 ## Features
 
-- **Live Countdown Timer**: Displays days, hours, minutes, and seconds until May 26, 2026
-- **Trailer Modal**: Embedded YouTube trailer that plays when opened
-- **Social Links**: Links to Rockstar's Twitter, YouTube, Reddit, and Discord
-- **Add to Calendar**: Button to add the GTA VI release date to Google Calendar
-- **Responsive Design**: Mobile-first approach that scales elegantly to large desktop screens
-- **Dark Theme**: Stylish dark theme with GTA-inspired neon accents
+- **Live countdown** — split-flap days/hours/minutes/seconds, updated every second
+- **Local timezone** — shows the release moment converted to the visitor's timezone
+- **Progress bar** — how far we've come since Trailer 1 (Dec 2023)
+- **Milestone banners** — celebratory alerts at 1 year, 100 days, 1 week, etc.
+- **Trailer modals** — Trailer 1 & 2 embedded from YouTube
+- **Pre-order menu** — links to PlayStation, Xbox, and Rockstar
+- **Add to Calendar** — Google, Apple, Outlook, Yahoo
+- **Share** — native Web Share API with a copy-to-clipboard fallback
+- **Fast & light** — responsive AVIF/WebP/JPG background with an instant blurred placeholder
+- **Accessible** — semantic HTML, screen-reader countdown, and `prefers-reduced-motion` support
+- **SEO-ready** — Open Graph/Twitter card, JSON-LD, sitemap, robots.txt, PWA manifest
 
-## Deployment Instructions
+## Project structure
 
-### Option 1: Deploy to GitHub Pages
+```
+index.html               Markup + head/meta/JSON-LD
+styles.css               All styling (CSS variables, responsive, reduced-motion)
+script.js                Countdown, trailers, calendar, pre-order, share
+site.webmanifest         PWA manifest
+robots.txt / sitemap.xml SEO
+CNAME                    Custom domain (gta6.date) — do not delete
+scripts/
+  optimize-images.mjs    Regenerates responsive images from the 8K source
+assets/
+  gta6-bg-8k.jpg         Source background (not served to browsers)
+  bg-{768,1280,1920}.{avif,webp,jpg}   Responsive variants (generated)
+  og-image.jpg           1200×630 social-share card (generated)
+  bg-lqip.txt            Inline base64 LQIP (generated)
+  favicon / app icons
+```
 
-1. Create a new GitHub repository
-2. Upload all files from this deployment folder to your repository
-3. Go to Settings > Pages
-4. Select the main branch as the source
-5. Click Save
-6. Your site will be published at `https://yourusername.github.io/repository-name/`
+## Customizing
 
-#### Using a Custom Domain with GitHub Pages
+Almost everything is driven by the `CONFIG` object at the top of `script.js`
+(release date, reveal date, trailer IDs, pre-order links, calendar event). Update
+it and the countdown, calendar, share text, and timezone line all follow.
 
-1. In your repository, create a file named `CNAME` (no file extension)
-2. Add your domain name to this file (e.g., `gta6.yourdomain.com` or `yourdomain.com`)
-3. Save the file and commit it to your repository
-4. Configure your domain DNS settings:
+> When you change the date, also update the matching static strings in
+> `index.html` (`<title>`, meta description, Open Graph/Twitter, and the JSON-LD
+> `datePublished`) — these are the no-JavaScript fallback.
 
-   For an apex domain (yourdomain.com):
-   - Add four A records pointing to GitHub's IP addresses:
-     ```
-     185.199.108.153
-     185.199.109.153
-     185.199.110.153
-     185.199.111.153
-     ```
+Colors/theme live in the `:root` CSS variables in `styles.css`.
 
-   For a subdomain (e.g., gta6.yourdomain.com):
-   - Add a CNAME record pointing to your GitHub Pages URL:
-     ```
-     CNAME: yourusername.github.io
-     ```
+## Regenerating images
 
-5. Wait for DNS changes to propagate (can take up to 24-48 hours)
-6. Go back to your repository settings
-7. In the GitHub Pages section, you should see your custom domain
-8. Check the "Enforce HTTPS" option for secure access
+The background and social card are generated from `assets/gta6-bg-8k.jpg` with
+[sharp](https://sharp.pixelplumbing.com/):
 
-### Option 2: Deploy to Netlify
+```bash
+npm install          # installs sharp (dev dependency)
+npm run optimize     # writes bg-*.{avif,webp,jpg}, og-image.jpg, bg-lqip.txt
+```
 
-1. Sign up for a free Netlify account at [netlify.com](https://www.netlify.com/)
-2. Drag and drop this deployment folder to the Netlify dashboard
-3. Your site will be published with a Netlify subdomain
-4. You can configure a custom domain in the Netlify settings
+Re-run whenever the source image changes.
 
-### Option 3: Deploy to Vercel
+## Deployment
 
-1. Sign up for a free Vercel account at [vercel.com](https://vercel.com/)
-2. Install the Vercel CLI: `npm i -g vercel`
-3. Navigate to this deployment folder in your terminal
-4. Run `vercel` and follow the prompts
-5. Your site will be published with a Vercel subdomain
-6. You can configure a custom domain in the Vercel settings
-
-### Option 4: Deploy to Any Web Hosting
-
-1. Upload all files from this deployment folder to your web hosting via FTP or their control panel
-2. Make sure the files are in the public HTML directory (often called `public_html`, `www`, or `htdocs`)
-3. Your site will be accessible at your domain name
-
-## File Structure
-
-- `index.html` - The main HTML file containing the website structure, styles, and JavaScript
-- `assets/` - Directory containing the background image and other assets
-  - `gta6-bg-8k.jpg` - The background image for the website
-
-## Customization
-
-You can customize the website by editing the `index.html` file:
-
-- Change the release date by modifying the `releaseDate` variable in the JavaScript section
-- Update the YouTube trailer by changing the `iframe.src` URL in the trailer modal code
-- Modify the colors by editing the CSS variables in the `:root` selector
-- Update the social links by changing the `href` attributes in the social buttons
-
-## Browser Compatibility
-
-The website is compatible with all modern browsers:
-- Chrome
-- Firefox
-- Safari
-- Edge
+Hosted on **GitHub Pages** with the custom domain in `CNAME`. Any push to `main`
+auto-deploys in ~1 minute. Keep `CNAME` in place and "Enforce HTTPS" enabled in
+**Settings → Pages**.
 
 ## License
 
-This project is open source and available under the MIT License.
+MIT.
